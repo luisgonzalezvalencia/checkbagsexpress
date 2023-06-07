@@ -1,0 +1,26 @@
+<mat-grid-list cols="1" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Bienvenido</mat-card-title>
+        <mat-card-subtitle>Sistema de chequeo express de maletas</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="../../assets/images/boardingpass.webp" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p class="infoParaUsuario">
+         Acerque el código de su BoardingPass al lector.
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Código Boarding Pass</mat-label>
+            <input id="boarding-code" type="text" matInput  placeholder="Ex. AAACCCDX1">
+          </mat-form-field>
+        </form>
+        <button mat-raised-button color="primary">ACEPTAR</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
