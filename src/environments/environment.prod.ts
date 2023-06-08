@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  URL_API: "https://api-aeropuerto.vercel.app/api"
+  URL_API: "https://api-aeropuerto.vercel.app/api/"
 };
