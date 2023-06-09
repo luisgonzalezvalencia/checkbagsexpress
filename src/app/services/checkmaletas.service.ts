@@ -15,25 +15,24 @@ export class CheckmaletasService {
 
   private urlApi: string = environment.URL_API;
 
-
-
   private get(url: string): Observable<any> {
     return this.http.get(url);
-    // return fetch(
-    //   url, // the url you are trying to access
-    //   {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     method: 'GET', // GET, POST, PUT, DELETE
-    //     mode: 'no-cors' // the most important option
-    //   }
-    // )
   }
 
-
+  private post(url: string, body: any): Observable<any> {
+    return this.http.post(url, body);
+  }
 
   getPasajeCliente() {
     return this.get(this.urlApi + 'pasajeros');
   }
+
+  getMaletasCliente() {
+    return this.get(this.urlApi + 'maletas');
+  }
+
+  postMaletasCliente(body: any) {
+    return this.post(this.urlApi + 'maletas', body);
+  }
+
 }

@@ -1,18 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckmaletasService } from '../services/checkmaletas.service';
 import { Router } from '@angular/router';
-
-
-interface Valija {
-  $numberDecimal: string;
-}
-interface Pasaje {
-  _id: string;
-  nombre: string;
-  vuelo: string;
-  valijas: Valija[]
-}
-
+import { Pasaje } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-inicio',
