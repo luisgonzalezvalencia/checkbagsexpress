@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckmaletasService } from '../services/checkmaletas.service';
+import { Router } from '@angular/router';
 
 
 interface Valija {
@@ -22,7 +23,7 @@ interface Pasaje {
 export class InicioComponent implements OnInit {
 
   public boardingpass: string = '';
-  constructor(private checkMaletasService: CheckmaletasService) { }
+  constructor(private checkMaletasService: CheckmaletasService, private router: Router) { }
 
   ngOnInit(): void {
     document.getElementById('boarding-code')?.focus();
@@ -30,26 +31,24 @@ export class InicioComponent implements OnInit {
 
   verificarPasaje() {
     if (this.boardingpass !== '') {
-      console.log(this.boardingpass);
 
-      this.checkMaletasService.getPasajeCliente().then((pasajes: Pasaje[]) => {
+      this.checkMaletasService.getPasajeCliente().subscribe((pasajes: Pasaje[]) => {
         if (pasajes.length > 0) {
+          console.log("Pasaje encontrado");
           let pasajeEncontrado = pasajes.find(pasaje => pasaje.vuelo == this.boardingpass);
           if (pasajeEncontrado) {
             //redirect al checkbaggage del pase.
-            //            this.router.navigate(['/checkbaggage', pasajeEncontrado.id
-
-            console.log(pasajeEncontrado);
+            this.router.navigate(['/checkmaleta', pasajeEncontrado._id]);
           } else {
             console.log("Pasaje no encontrado");
+            this.router.navigate(['/checkmaleta', 1]);
           }
+        } else {
+          console.log(pasajes);
         }
-      }).catch((error) => {
-        console.log(error);
       })
     }
 
-    console.log(this.boardingpass);
   }
 
 }
