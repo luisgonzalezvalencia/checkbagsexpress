@@ -42,11 +42,7 @@
   margin-bottom: 10px;
 }
 
-.barcode img {
-  width: 120px;
+.barcode canvas {
+  width: 260px;
   height: auto;
-}
-
-.footer {
-  text-align: center;
 }

@@ -98,6 +98,7 @@ export class CheckMaletaComponent implements OnInit {
   }
 
   openPrintComponent(): void {
+    // this.checkMaletasService.postMaletasCliente()
     this.router.navigate(['imprimirticket', this.valijaSeleccionada?.maleta_id]);
   }
 }
