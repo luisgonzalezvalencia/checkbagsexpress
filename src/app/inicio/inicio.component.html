@@ -14,7 +14,10 @@
       </div><br>
       <div class="row">
 
-        <button class="btn btn-lg btn-dark btn-block" (click)="verificarPasaje()">ACEPTAR</button>
+        <button [disabled]="isLoading" class="btn btn-lg btn-dark btn-block" (click)="verificarPasaje()">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isLoading ? "Cargando..." : "Aceptar"}}
+        </button>
 
       </div>
       <p class="text-center">© 2023</p>

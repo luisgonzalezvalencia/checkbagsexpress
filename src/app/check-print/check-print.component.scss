@@ -1,0 +1,52 @@
+.ticket {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: 300px;
+  padding: 20px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.content {
+  margin-bottom: 10px;
+}
+
+.passenger-info,
+.flight-info {
+  margin-bottom: 10px;
+}
+
+.passenger-info label,
+.flight-info label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.passenger-info input,
+.flight-info input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.barcode {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.barcode img {
+  width: 120px;
+  height: auto;
+}
+
+.footer {
+  text-align: center;
+}

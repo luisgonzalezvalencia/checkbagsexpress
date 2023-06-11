@@ -1,0 +1,24 @@
+<div class="ticket">
+  <div class="header">
+    <h2>Etiqueta de Equipaje</h2>
+  </div>
+  <div class="content">
+    <div class="passenger-info">
+      <label>Nombre del Pasajero:</label>
+      <span>{{ passengerName }}</span>
+    </div>
+    <div class="flight-info">
+      <label>Vuelo desde:</label>
+      <span>{{ flightFrom }}</span>
+      <label>Vuelo hacia:</label>
+      <span>{{ flightTo }}</span>
+    </div>
+    <div class="barcode">
+      <img src="barcode-image-1.png" alt="Barcode 1">
+      <img src="barcode-image-2.png" alt="Barcode 2">
+    </div>
+  </div>
+  <div class="footer">
+    <button (click)="print()">Imprimir</button>
+  </div>
+</div>

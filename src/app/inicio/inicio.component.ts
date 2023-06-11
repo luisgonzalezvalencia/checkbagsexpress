@@ -12,6 +12,8 @@ import { Pasaje } from '../interfaces/interfaces';
 export class InicioComponent implements OnInit {
 
   public boardingpass: string = '';
+  public isLoading: boolean = false;
+
   constructor(private checkMaletasService: CheckmaletasService, private router: Router) { }
 
   ngOnInit(): void {
@@ -20,7 +22,7 @@ export class InicioComponent implements OnInit {
 
   verificarPasaje() {
     if (this.boardingpass !== '') {
-
+      this.isLoading = true;
       this.checkMaletasService.getPasajeCliente().subscribe((pasajes: Pasaje[]) => {
         if (pasajes.length > 0) {
           console.log("Pasaje encontrado");

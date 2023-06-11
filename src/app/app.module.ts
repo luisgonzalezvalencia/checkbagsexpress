@@ -15,12 +15,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { MatDividerModule } from '@angular/material/divider';
 import { CheckMaletaComponent } from './check-maleta/check-maleta.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CheckPrintComponent } from './check-print/check-print.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    CheckMaletaComponent
+    CheckMaletaComponent,
+    CheckPrintComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CheckmaletasService } from '../services/checkmaletas.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pasaje, Valija } from '../interfaces/interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckPrintComponent } from '../check-print/check-print.component';
 
 @Component({
   selector: 'app-check-maleta',
@@ -20,6 +22,8 @@ export class CheckMaletaComponent implements OnInit {
 
   public valijaPesada: number | undefined;
 
+  public isLoading: boolean = false;
+
   constructor(private router: Router, private checkMaletasService: CheckmaletasService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -31,11 +35,13 @@ export class CheckMaletaComponent implements OnInit {
   obtenerPasaje() {
     if (this.idPasaje !== '') {
 
+      this.isLoading = true;
       this.checkMaletasService.getPasajeCliente().subscribe((pasajes: Pasaje[]) => {
         if (pasajes.length > 0) {
           let pasajeEncontrado = pasajes.find(pasaje => pasaje._id == this.idPasaje);
           if (pasajeEncontrado) {
             this.pasajeCliente = pasajeEncontrado;
+            this.isLoading = false;
           } else {
             console.log("Pasaje no encontrado");
             this.router.navigate(['/inicio']);
@@ -81,5 +87,17 @@ export class CheckMaletaComponent implements OnInit {
       this.valijaPesada = peso;
     }, 1000)
 
+  }
+
+  pesoOk() {
+    if (this.valijaPesada && this.valijaPesada <= parseFloat(this.valijaSeleccionada?.peso.$numberDecimal || "0")) {
+      return true;
+    }
+
+    return false;
+  }
+
+  openPrintComponent(): void {
+    this.router.navigate(['imprimirticket', this.valijaSeleccionada?.maleta_id]);
   }
 }

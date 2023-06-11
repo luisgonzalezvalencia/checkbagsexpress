@@ -21,7 +21,10 @@
 
 .maletas:hover {
   cursor: pointer;
-  border: 2px solid #424242;
+  border: 2px solid #19647e;
+  .card-body {
+    background-color: #19647e !important;
+  }
 }
 
 #nuevaMaleta {
