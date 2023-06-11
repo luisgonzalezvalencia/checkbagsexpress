@@ -1,37 +1,33 @@
-.example-card {
-  max-width: 400px;
-}
-
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
-}
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+.alert {
   width: 100%;
+  margin-top: 20px;
 }
 
-.example-full-width {
-  width: 100%;
-}
-
-.infoParaUsuario {
-  font-size: large;
-}
-
-button {
-  float: right;
-}
-
-.titleSeleccion {
-  background: #424242;
-  color: #fff;
+.card {
+  -webkit-box-shadow: 13px 13px 25px 0px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 13px 13px 25px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 13px 13px 25px 0px rgba(0, 0, 0, 0.8);
+  min-height: 220px;
+  border: none;
+  img {
+    height: 150px;
+    width: fit-content;
+    margin: auto;
+  }
+  .card-body {
+    border-radius: 0 0 0.15rem 0.15rem;
+  }
 }
 
 .maletas:hover {
   cursor: pointer;
-  mat-card {
-    border: 2px solid #424242;
-  }
+  border: 2px solid #424242;
+}
+
+#nuevaMaleta {
+  margin-top: 10%;
+}
+
+.color-white {
+  color: white;
 }

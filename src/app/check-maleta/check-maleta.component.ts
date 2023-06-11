@@ -63,7 +63,7 @@ export class CheckMaletaComponent implements OnInit {
   }
 
   seleccionarValija(valijaId: string) {
-    this.valijaSeleccionada = this.pasajeCliente?.valijas.find(v => v.maleta_id == valijaId);
+    this.valijaSeleccionada = this.pasajeCliente?.maletas.find(v => v.maleta_id == valijaId);
     this.valijaIsSelected = true;
 
     setTimeout(() => {

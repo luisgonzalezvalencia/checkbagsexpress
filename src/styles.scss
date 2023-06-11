@@ -1,4 +1,56 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.btn-dark,
+.dark,
+.bg-dark {
+  background-color: #1f271b !important;
+}
+
+.btn-primary,
+.primary,
+.bg-primary {
+  background-color: #19647e !important;
+}
+
+.btn-success,
+.success,
+.bg-success {
+  background-color: #28afb0 !important;
+}
+
+.btn-warning,
+.warning,
+.bg-warning {
+  background-color: #f4d35e !important;
+}
+
+.alert-warning {
+  background-color: #f4d35e !important;
+  border-color: #f2cb40 !important;
+  color: #19647e !important;
+
+  hr {
+    border-top-color: #f2cb40 !important;
+  }
+}
+
+.btn-danger,
+.danger,
+.bg-danger {
+  background-color: #ee964b !important;
+}
+
+.btn-info,
+.info,
+.bg-light {
+  background-color: #f7e08d !important;
+}

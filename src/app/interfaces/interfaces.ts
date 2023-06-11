@@ -10,5 +10,5 @@ export interface Pasaje {
   _id: string;
   nombre: string;
   vuelo: string;
-  valijas: Valija[]
+  maletas: Valija[]
 }

@@ -1,4 +1,56 @@
-<div *ngIf="!valijaIsSelected">
+<nav class="navbar navbar-light bg-light">
+  Registro de Maletas
+  <a class="navbar-brand" href="#">Cancelar</a>
+</nav>
+<div class="container">
+  <div class="row" *ngIf="!valijaIsSelected">
+    <div class="alert alert-warning" role="alert">
+      <h4 class="alert-heading">Pasajero: {{pasajeCliente?.nombre}}</h4>
+      <p>Vuelo: {{pasajeCliente?.vuelo}}</p>
+      <hr>
+      <p class="mb-0">Selecciona la Maleta a pesar y chequear:</p>
+    </div>
+
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xs-12 col-lg-4" *ngFor="let maleta of pasajeCliente?.maletas; let i = index">
+          <div class="card mt-3 maletas" (click)="seleccionarValija(maleta.maleta_id)">
+            <img mat-card-image [src]="imageValija(maleta.peso.$numberDecimal)" alt="Imagen de Maleta">
+            <div class="card-body bg-success color-white">
+              <div class="row">
+                <div class="col-12">
+                  <h1 class="h3 mb-3 font-weight-normal">Baggage {{i}} </h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="infoParaUsuario">
+                    Max: {{maleta.peso.$numberDecimal}} KG
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+          <div class="card maletas" id="nuevaMaleta">
+            <img mat-card-image src="../../assets/images/plus.jpg" alt="Nueva Maleta">
+            <div class="card-body bg-danger">
+              <div class="row">
+                <div class="col-12">
+                  <h1 class="h3 mb-3 font-weight-normal">Comprar equipaje extra</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- <div *ngIf="!valijaIsSelected">
 
   <mat-grid-list class="titleSeleccion" cols="1" rowHeight="20:1">
     <mat-grid-tile>
@@ -28,9 +80,9 @@
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-</div>
+</div> -->
 
-<div *ngIf="valijaIsSelected">
+<!-- <div *ngIf="valijaIsSelected">
 
   <mat-grid-list class="titleSeleccion" cols="1" rowHeight="20:1">
     <mat-grid-tile>
@@ -60,4 +112,4 @@
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-</div>
+</div> -->

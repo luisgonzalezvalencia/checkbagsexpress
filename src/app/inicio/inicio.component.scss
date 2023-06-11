@@ -1,25 +1,14 @@
-.example-card {
-  max-width: 400px;
+.infoParaUsuario {
+  font-size: large;
 }
 
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
-}
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
+#card-boarding {
   width: 100%;
+  max-width: 600px;
+  padding: 15px;
+  margin: auto;
+  -webkit-box-shadow: 13px 13px 25px 0px rgba(0,0,0,0.8);
+-moz-box-shadow: 13px 13px 25px 0px rgba(0,0,0,0.8);
+box-shadow: 13px 13px 25px 0px rgba(0,0,0,0.8);
 }
 
-.example-full-width {
-  width: 100%;
-}
-
-.infoParaUsuario{
-font-size: large;
-}
-
-button {
-  float: right;
-}
