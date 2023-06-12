@@ -19,6 +19,8 @@ export class PaymentComponent implements OnInit {
   idMaleta: string = '';
   idPasaje: string = '';
   peso: string = '';
+  vuelo: string = '';
+  idPasajero: string = '';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private checkMaletasService: CheckmaletasService) { }
 
@@ -28,10 +30,15 @@ export class PaymentComponent implements OnInit {
       // Obtener el valor entre 'pje-' y '-peso'
       this.idPasaje = str.split('pje-')[1].split('-peso')[0];
     } else {
-      this.idMaleta = this.activatedRoute.snapshot.params['id'];
+      this.idMaleta = str.split('-peso-')[0];
+      this.idPasajero = str.split('-pasajero-')[1];
     }
     // Obtener el valor después de '-peso-'
-    this.peso = str.split('-peso-')[1];
+
+    let datosPeso = str.split('-peso-')[1];
+    this.peso = datosPeso.split('-vuelo-')[0];
+    this.vuelo = datosPeso.split('-vuelo-')[1].split('-pasajero-')[0];
+
     this.amount = this.obtenerMonto();
     this.itemDescription = this.obtenerDescription();
   }
@@ -100,7 +107,19 @@ export class PaymentComponent implements OnInit {
     } else {
       //si fue un pesaje, registrar la maleta e imprimmo el ticket
       //TODO: REGISTRAR MALETA
-      this.router.navigate(['imprimirticket', this.idMaleta]);
+      // this.isLoading = true;
+      //datos de la maleta
+      let datosMaleta = {
+        "vuelo": this.vuelo,
+        "pasajeroId": this.idPasajero,
+        "maletaId": this.idMaleta,
+        "peso": this.peso,
+        "despachada": false
+      }
+      this.checkMaletasService.postMaletasCliente(datosMaleta).subscribe((response) => {
+        this.router.navigate(['imprimirticket',this.idMaleta], { queryParams: { idCliente: this.idPasajero } });
+      })
+
     }
   }
 
