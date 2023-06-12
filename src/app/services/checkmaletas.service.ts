@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map, switchMap } from 'rxjs/operators';
+import { ResponseMaleta } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +21,23 @@ export class CheckmaletasService {
   }
 
   private post(url: string, body: any): Observable<any> {
-    return this.http.post(url, body);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const options = { headers };
+    return this.http.post(url, body, options);
   }
 
   getPasajeCliente() {
     return this.get(this.urlApi + 'pasajeros');
   }
 
-  getMaletasCliente() {
-    return this.get(this.urlApi + 'maletas');
+  getMaletasCliente(idCliente: string) {
+    return this.get(this.urlApi + 'maletas?pasajeroId=' + idCliente);
   }
 
-  postMaletasCliente(body: any) {
+  postMaletasCliente(body: any): Observable<ResponseMaleta> {
     return this.post(this.urlApi + 'maletas', body);
   }
 

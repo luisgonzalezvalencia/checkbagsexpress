@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckmaletasService } from '../services/checkmaletas.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Pasaje, Valija } from '../interfaces/interfaces';
+import { Pasaje, ResponseMaleta, Valija } from '../interfaces/interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { CheckPrintComponent } from '../check-print/check-print.component';
 
@@ -53,8 +53,8 @@ export class CheckMaletaComponent implements OnInit {
     }
   }
 
-  imageValija(peso: string) {
-    let pesoD = parseFloat(peso);
+  imageValija(peso: number) {
+    let pesoD = peso;
     if (pesoD < 25) {
       return "assets/images/1-24.jpg"
     }
@@ -82,27 +82,46 @@ export class CheckMaletaComponent implements OnInit {
       let minimmo = 7;
       let promedioExceso = 2;
       //obtener un random entre 9 kg y el maximmo permitido y 2 kg mas o menos que se pudo pasar el pasajero
-      let peso = Math.floor(Math.random() * (parseFloat(this.valijaSeleccionada?.peso?.$numberDecimal || "0") - minimmo + promedioExceso)) + minimmo;
+      let peso = Math.floor(Math.random() * (this.valijaSeleccionada?.peso || 0 - minimmo + promedioExceso)) + minimmo;
       this.valijaPesada = peso;
     }, 1000)
 
   }
 
   pesoOk() {
-    if (this.valijaPesada && this.valijaPesada <= parseFloat(this.valijaSeleccionada?.peso.$numberDecimal || "0")) {
+    if (this.valijaPesada && this.valijaPesada <= (this.valijaSeleccionada?.peso || 0)) {
       return true;
     }
 
     return false;
   }
 
+  //registra la maleta e imprimir el ticket
   openPrintComponent(): void {
-    // this.checkMaletasService.postMaletasCliente()
-    this.router.navigate(['imprimirticket', this.valijaSeleccionada?.maleta_id]);
+
+    this.isLoading = true;
+    //datos de la maleta
+    let datosMaleta = {
+      "vuelo": this.pasajeCliente?.vuelo,
+      "pasajeroId": this.pasajeCliente?._id,
+      "maletaId": this.valijaSeleccionada?.maleta_id,
+      "peso": this.valijaPesada,
+      "despachada": false
+    }
+
+    this.checkMaletasService.postMaletasCliente(datosMaleta).subscribe((response: ResponseMaleta) => {
+      this.isLoading = false;
+      if (response.message == "Maleta creada exitosamente") {
+        //redirijo a la ruta de impresion del ticket
+        this.router.navigate(['imprimirticket', this.valijaSeleccionada?.maleta_id], { queryParams: { idCliente: this.pasajeCliente?._id } });
+      } else {
+        console.log(response.message);
+      }
+    });
   }
 
   pagarPesoExtra() {
-    let pesoExtra = (this.valijaPesada || 0) - parseFloat(this.valijaSeleccionada?.peso?.$numberDecimal || "0");
+    let pesoExtra = (this.valijaPesada || 0) - (this.valijaSeleccionada?.peso || 0);
     this.router.navigate(['payment', this.valijaSeleccionada?.maleta_id + "-peso-" + pesoExtra.toFixed(2)]);
   }
 

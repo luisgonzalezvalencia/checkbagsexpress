@@ -1,9 +1,7 @@
 
 export interface Valija {
   maleta_id: string,
-  peso: {
-    $numberDecimal: string;
-  }
+  peso: number
 }
 
 export interface Pasaje {
@@ -11,4 +9,19 @@ export interface Pasaje {
   nombre: string;
   vuelo: string;
   maletas: Valija[]
+}
+
+
+export interface Maletas {
+  _id: string,
+  pasajeroId: string,
+  maletaId: string,
+  peso: string,
+  vuelo: string,
+  despachada: boolean
+}
+
+export interface ResponseMaleta {
+  message: string,
+  maleta: Maletas
 }
