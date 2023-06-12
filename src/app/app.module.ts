@@ -9,6 +9,7 @@ import { CheckMaletaComponent } from './check-maleta/check-maleta.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckPrintComponent } from './check-print/check-print.component';
 import { PaymentComponent } from './payment/payment.component';
+import { EquipajeExtraComponent } from './equipaje-extra/equipaje-extra.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PaymentComponent } from './payment/payment.component';
     CheckMaletaComponent,
     CheckPrintComponent,
     PaymentComponent,
+    EquipajeExtraComponent,
   ],
   imports: [
     BrowserModule,

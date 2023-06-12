@@ -12,7 +12,9 @@
       <form>
         <div class="form-group">
           <label for="cardNumber">Número de Tarjeta</label>
-          <input type="text" class="form-control" id="cardNumber" placeholder="Ingrese el número de tarjeta">
+          <input type="text" class="form-control" name="cardNumber" id="cardNumber"
+            placeholder="Ingrese el número de tarjeta" [(ngModel)]="cardNumber" (keyup)="applyCardNumberMask()"
+            (keydown)="preventNonNumericInput($event)">
         </div>
         <div class="form-group">
           <label for="cardName">Nombre en la Tarjeta</label>
@@ -21,18 +23,19 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="expiryDate">Fecha de Vencimiento</label>
-            <input type="text" class="form-control" id="expiryDate" placeholder="MM/AA">
+            <input type="text" class="form-control" name="expirationDate" id="expirationDate" placeholder="MM/AA"
+              [(ngModel)]="expirationDate" (keyup)="applyExpirationDateMask()"
+              (keydown)="preventNonNumericInput($event)">
           </div>
           <div class="form-group col-md-6">
             <label for="securityCode">Código de Seguridad</label>
-            <input type="text" class="form-control" id="securityCode" placeholder="CVC">
+            <input type="password" maxlength="3" class="form-control" id="securityCode" placeholder="CVC">
           </div>
         </div>
         <div class="form-group">
           <label for="amount">Monto</label>
           <div class="input-group">
-            <input disabled name="amount" type="text" class="form-control" id="amount"
-              [(ngModel)]="amount">
+            <input disabled name="amount" type="text" class="form-control" id="amount" [(ngModel)]="amount">
             <div class="input-group-append">
               <span class="input-group-text">ARS</span>
             </div>
@@ -40,9 +43,11 @@
         </div>
         <div class="form-group">
           <label for="itemDescription">Descripción del Artículo</label>
-          <textarea class="form-control" name="itemDescription" id="itemDescription" rows="3" placeholder="Ingrese la descripción del artículo" [(ngModel)]="itemDescription" [readonly]="true"></textarea>
+          <textarea class="form-control" name="itemDescription" id="itemDescription" rows="3"
+            placeholder="Ingrese la descripción del artículo" [(ngModel)]="itemDescription"
+            [readonly]="true"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Pagar</button>
+        <button type="submit" class="btn btn-primary" (click)="confirmarPago()">Pagar</button>
       </form>
     </div>
   </div>

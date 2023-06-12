@@ -51,7 +51,6 @@ export class CheckMaletaComponent implements OnInit {
         }
       })
     }
-
   }
 
   imageValija(peso: string) {
@@ -102,7 +101,11 @@ export class CheckMaletaComponent implements OnInit {
     this.router.navigate(['imprimirticket', this.valijaSeleccionada?.maleta_id]);
   }
 
-  pagarPesoExtra(){
+  pagarPesoExtra() {
     this.router.navigate(['payment', this.valijaSeleccionada?.maleta_id]);
+  }
+
+  comprarEquipajeExtra() {
+    this.router.navigate(['comprarEquipaje', this.idPasaje]);
   }
 }

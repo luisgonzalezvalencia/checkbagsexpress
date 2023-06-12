@@ -1,0 +1,38 @@
+<nav class="navbar navbar-light bg-light">
+  Comprar Equipaje Adicional
+  <a class="navbar-brand" href="#">Cancelar</a>
+</nav>
+<div class="container">
+  <div class="row" *ngIf="!valijaIsSelected && !isLoading">
+    <div class="alert alert-warning" role="alert">
+      <h4 class="alert-heading">Pasajero: {{pasajeCliente?.nombre}}</h4>
+      <p>Vuelo: {{pasajeCliente?.vuelo}}</p>
+      <hr>
+      <p class="mb-0">Selecciona el tamaño a comprar:</p>
+    </div>
+
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xs-12 col-lg-4" *ngFor="let peso of ['12','20', '25', '30']; let i = index" (click)="comprarMaleta(peso)">
+          <div class="card mt-3 maletas">
+            <img mat-card-image [src]="imageValija(peso)" alt="Imagen de Maleta">
+            <div class="card-body bg-success color-white">
+              <div class="row">
+                <div class="col-12">
+                  <h1 class="h3 mb-3 font-weight-normal">Opción {{peso}} KG </h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class="infoParaUsuario">
+                   Precio: ${{obtenerPrecio(peso)}} ARS
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
