@@ -102,7 +102,8 @@ export class CheckMaletaComponent implements OnInit {
   }
 
   pagarPesoExtra() {
-    this.router.navigate(['payment', this.valijaSeleccionada?.maleta_id]);
+    let pesoExtra = (this.valijaPesada || 0) - parseFloat(this.valijaSeleccionada?.peso?.$numberDecimal || "0");
+    this.router.navigate(['payment', this.valijaSeleccionada?.maleta_id + "-peso-" + pesoExtra.toFixed(2)]);
   }
 
   comprarEquipajeExtra() {
