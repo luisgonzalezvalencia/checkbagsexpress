@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import ObjectId from "bson-objectid";
+import { CheckmaletasService } from '../services/checkmaletas.service';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -17,7 +20,7 @@ export class PaymentComponent implements OnInit {
   idPasaje: string = '';
   peso: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private checkMaletasService: CheckmaletasService) { }
 
   ngOnInit(): void {
     let str = this.activatedRoute.snapshot.params['id'];
@@ -76,10 +79,25 @@ export class PaymentComponent implements OnInit {
 
   confirmarPago() {
     //si fue una compra de equipaje adicional, agrego la maleta a la reserva y redirecciono al listado de maletas
-    if(this.idPasaje){
+    if (this.idPasaje) {
       //TODO: AGREGAR MALETA EN RESERVA
-      this.router.navigate(['checkmaleta', this.idPasaje]);
-    }else{
+      const newObjectId = new ObjectId();
+      const objectIdString = newObjectId.toHexString();
+      let maleta = {
+        maleta_id: objectIdString,
+        peso: parseFloat(this.peso)
+      };
+      let data = {
+        id: this.idPasaje,
+        maleta: maleta
+      }
+      this.checkMaletasService.putMaletaPasaje(data).subscribe((response) => {
+        if (response.message == "Maletas añadidas exitosamente") {
+          this.router.navigate(['checkmaleta', this.idPasaje]);
+        }
+
+      });
+    } else {
       //si fue un pesaje, registrar la maleta e imprimmo el ticket
       //TODO: REGISTRAR MALETA
       this.router.navigate(['imprimirticket', this.idMaleta]);
@@ -118,7 +136,5 @@ export class PaymentComponent implements OnInit {
     }
 
     return "Equipaje adicional de 30 KG";
-
   }
-
 }

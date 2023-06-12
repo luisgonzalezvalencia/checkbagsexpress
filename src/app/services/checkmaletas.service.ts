@@ -29,6 +29,15 @@ export class CheckmaletasService {
     return this.http.post(url, body, options);
   }
 
+  private put(url: string, body: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const options = { headers };
+    return this.http.put(url, body, options);
+  }
+
   getPasajeCliente() {
     return this.get(this.urlApi + 'pasajeros');
   }
@@ -41,4 +50,7 @@ export class CheckmaletasService {
     return this.post(this.urlApi + 'maletas', body);
   }
 
+  putMaletaPasaje(body: any): Observable<any> {
+    return this.put(this.urlApi + 'pasajeros', body);
+  }
 }
