@@ -20,20 +20,17 @@ export class PaymentComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    let str = this.activatedRoute.snapshot.params['id'];
     if (this.activatedRoute.snapshot.params['id'].includes("pje-")) {
-      let str = this.activatedRoute.snapshot.params['id'];
       // Obtener el valor entre 'pje-' y '-peso'
       this.idPasaje = str.split('pje-')[1].split('-peso')[0];
-
-      // Obtener el valor después de '-peso-'
-      this.peso = str.split('-peso-')[1];
-
-      this.amount = this.obtenerMonto();
-      this.itemDescription = this.obtenerDescription();
     } else {
       this.idMaleta = this.activatedRoute.snapshot.params['id'];
     }
-
+    // Obtener el valor después de '-peso-'
+    this.peso = str.split('-peso-')[1];
+    this.amount = this.obtenerMonto();
+    this.itemDescription = this.obtenerDescription();
   }
 
   applyCardNumberMask() {
