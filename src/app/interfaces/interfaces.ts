@@ -7,8 +7,11 @@ export interface Valija {
 export interface Pasaje {
   _id: string;
   nombre: string;
-  vuelo: string;
-  maletas: Valija[]
+  numeroVuelo: string;
+  maletas: Valija[];
+  desde: string;
+  hacia: string;
+  horario: string;
 }
 
 

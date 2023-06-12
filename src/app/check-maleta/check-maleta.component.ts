@@ -102,7 +102,7 @@ export class CheckMaletaComponent implements OnInit {
     this.isLoading = true;
     //datos de la maleta
     let datosMaleta = {
-      "vuelo": this.pasajeCliente?.vuelo,
+      "vuelo": this.pasajeCliente?.numeroVuelo,
       "pasajeroId": this.pasajeCliente?._id,
       "maletaId": this.valijaSeleccionada?.maleta_id,
       "peso": this.valijaPesada,

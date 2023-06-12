@@ -15,7 +15,7 @@
   <div class="row" *ngIf="!valijaIsSelected && !isLoading">
     <div class="alert alert-warning" role="alert">
       <h4 class="alert-heading">Pasajero: {{pasajeCliente?.nombre}}</h4>
-      <p>Vuelo: {{pasajeCliente?.vuelo}}</p>
+      <p>Vuelo: {{pasajeCliente?.numeroVuelo}}</p>
       <hr>
       <p class="mb-0">Selecciona la Maleta a pesar y chequear:</p>
     </div>
@@ -61,7 +61,7 @@
   <div class="row" *ngIf="valijaIsSelected && !isLoading">
     <div class="alert alert-warning" role="alert">
       <h4 class="alert-heading">Pasajero: {{pasajeCliente?.nombre}}</h4>
-      <p>Vuelo: {{pasajeCliente?.vuelo}}</p>
+      <p>Vuelo: {{pasajeCliente?.numeroVuelo}}</p>
     </div>
     <div class="alert alert-primary" role="alert">
       Apoya la valija en la balanza y espera. No la retires hasta imprimir.

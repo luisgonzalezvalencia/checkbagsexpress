@@ -26,13 +26,12 @@ export class InicioComponent implements OnInit {
       this.checkMaletasService.getPasajeCliente().subscribe((pasajes: Pasaje[]) => {
         if (pasajes.length > 0) {
           console.log("Pasaje encontrado");
-          let pasajeEncontrado = pasajes.find(pasaje => pasaje.vuelo == this.boardingpass);
+          let pasajeEncontrado = pasajes.find(pasaje => pasaje.numeroVuelo == this.boardingpass);
           if (pasajeEncontrado) {
             //redirect al checkbaggage del pase.
             this.router.navigate(['/checkmaleta', pasajeEncontrado._id]);
           } else {
             console.log("Pasaje no encontrado");
-            this.router.navigate(['/checkmaleta', 1]);
           }
         } else {
           console.log(pasajes);

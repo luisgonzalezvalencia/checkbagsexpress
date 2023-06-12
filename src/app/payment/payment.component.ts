@@ -75,8 +75,15 @@ export class PaymentComponent implements OnInit {
   }
 
   confirmarPago() {
-    //actualizar la compra del pasaje y registrar la maleta
-    this.router.navigate(['imprimirticket', this.idMaleta]);
+    //si fue una compra de equipaje adicional, agrego la maleta a la reserva y redirecciono al listado de maletas
+    if(this.idPasaje){
+      //TODO: AGREGAR MALETA EN RESERVA
+      this.router.navigate(['checkmaleta', this.idPasaje]);
+    }else{
+      //si fue un pesaje, registrar la maleta e imprimmo el ticket
+      //TODO: REGISTRAR MALETA
+      this.router.navigate(['imprimirticket', this.idMaleta]);
+    }
   }
 
   obtenerMonto() {
