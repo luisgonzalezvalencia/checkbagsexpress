@@ -101,4 +101,8 @@ export class CheckMaletaComponent implements OnInit {
     // this.checkMaletasService.postMaletasCliente()
     this.router.navigate(['imprimirticket', this.valijaSeleccionada?.maleta_id]);
   }
+
+  pagarPesoExtra(){
+    this.router.navigate(['payment', this.valijaSeleccionada?.maleta_id]);
+  }
 }
