@@ -10,13 +10,16 @@
   <div class="content">
     <div class="passenger-info">
       <label>Nombre del Pasajero:</label>
-      <span>Santiago Ferro</span>
+      <span>{{pasajeCliente?.nombre}}</span>
     </div>
     <div class="flight-info">
       <label>Vuelo desde:</label>
-      <span>Argentina</span>
+      <span>{{pasajeCliente?.desde}}</span>
       <label>Vuelo hacia:</label>
-      <span>Estados Unidos</span>
+      <span>{{pasajeCliente?.hacia}}</span>
+    </div>
+    <div class="flight-info">
+      ---------------------------------------------
     </div>
     <div class="flight-info">
       <label>Peso Maleta:</label>
@@ -35,4 +38,8 @@
   <div class="footer">
     <button class="btn btn-dark btn-block" (click)="print()">Imprimir</button>
   </div>
+</div>
+
+<div class="ticket" *ngIf="isLoading">
+  <div class="spinner-border" role="status"></div>
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { ActivatedRoute } from '@angular/router';
 import * as JsBarcode from 'jsbarcode';
 import { CheckmaletasService } from '../services/checkmaletas.service';
-import { Maletas } from '../interfaces/interfaces';
+import { Maletas, Pasaje } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-check-print',
@@ -18,6 +18,7 @@ export class CheckPrintComponent implements OnInit, AfterViewInit {
   idMaleta: string = "";
   idCliente: string = "";
   isLoading: boolean = false;
+  public pasajeCliente: Pasaje | undefined = undefined;
 
   maletaPrint: Maletas | undefined;
 
@@ -32,9 +33,7 @@ export class CheckPrintComponent implements OnInit, AfterViewInit {
     this.idCliente = this.activatedRoute.snapshot.queryParams.idCliente;
     this.obtenerMaleta();
 
-    // setTimeout(() => {
-    //   this.print();
-    // }, 3000);
+
   }
 
   obtenerMaleta() {
@@ -48,6 +47,28 @@ export class CheckPrintComponent implements OnInit, AfterViewInit {
           if (maletaEncontrada) {
             this.maletaPrint = maletaEncontrada;
             this.isLoading = false;
+
+            this.checkMaletasService.getPasajeCliente().subscribe((pasajes: Pasaje[]) => {
+              if (pasajes.length > 0) {
+                let pasajeEncontrado = pasajes.find(pasaje => pasaje._id == this.idCliente);
+                if (pasajeEncontrado) {
+                  //redirect al checkbaggage del pase.
+                  this.pasajeCliente = pasajeEncontrado;
+
+                  setTimeout(() => {
+                    this.print();
+                  }, 2000);
+                } else {
+                  console.log("Pasaje no encontrado");
+                }
+              } else {
+                console.log(pasajes);
+              }
+              this.isLoading = false;
+
+            })
+
+            this.generateBarcodes();
           } else {
             console.log("maleta no encontrada");
             // this.router.navigate(['/inicio']);
@@ -61,19 +82,19 @@ export class CheckPrintComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.generateBarcodes();
+      // this.generateBarcodes();
     }, 0);
   }
 
   generateBarcodes(): void {
-    JsBarcode(this.barcode1.nativeElement, 'barcode-value-1', {
+    JsBarcode(this.barcode1.nativeElement, (this.maletaPrint?.maletaId || "code-maleta"), {
       format: 'CODE128',
       displayValue: true,
       width: 2,
       height: 40
     });
 
-    JsBarcode(this.barcode2.nativeElement, 'barcode-value-2', {
+    JsBarcode(this.barcode2.nativeElement, (this.maletaPrint?.pasajeroId || "code-pasajero"), {
       format: 'CODE128',
       displayValue: true,
       width: 2,
